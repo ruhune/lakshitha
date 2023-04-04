@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+class Node {
+  public:
+    int data;
+    Node* next;
+};
+
+class Stack {
+  private:
+    Node* top;
+  public:
+    Stack() {
+      top = NULL;
+    }
+    bool isEmpty() {
+      return (top == NULL);
+    }
+    void push(int value) {
+      Node* newNode = new Node();
+      newNode->data = value;
+      newNode->next = top;
+      top = newNode;
+    }
+    void pop() {
+      if (isEmpty()) {
+        cout << "Stack Underflow" << endl;
+        return;
+      }
+      Node* temp = top;
+      top = top->next;
+      delete temp;
+    }
+    int topvalue() {
+      if (isEmpty()) {
+        cout << "Stack is empty" << endl;
+        return -1;
+      }
+      return top->data;
+    }
+};
+
+int main() {
+  Stack myStack;
+  myStack.push(5);
+  myStack.push(10);
+  myStack.push(15);
+  myStack.pop();
+  cout << myStack.topvalue() << endl;
+  return 0;
+}
